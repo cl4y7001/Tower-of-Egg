@@ -1,0 +1,175 @@
+/* =====================
+   全域安全設定
+===================== */
+* {
+  box-sizing: border-box;
+  caret-color: transparent; /* 🔥 關掉 | 游標 */
+}
+
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+  font-family: system-ui, -apple-system, "Noto Sans TC", sans-serif;
+  color: #fff;
+}
+
+/* =====================
+   背景層（完整顯示）
+===================== */
+#bg {
+  position: fixed;
+  inset: 0;
+  background-image: url("assets/background.png");
+  background-repeat: no-repeat;
+  background-position: center top;
+  background-size: contain;   /* 🔥 不硬塞 */
+  background-color: #000;     /* 留白補色 */
+  z-index: 0;
+}
+
+/* =====================
+   HUD / 任務文字
+===================== */
+#hud {
+  position: fixed;
+  top: 16px;
+  left: 24px;
+  z-index: 3;
+  max-width: 45%;
+  pointer-events: none;
+}
+
+#hud h1 {
+  margin: 0 0 6px;
+  font-size: 1.4rem;
+}
+
+#goalText {
+  margin: 0;
+  opacity: 0.9;
+}
+
+.hint {
+  margin-top: 4px;
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+/* =====================
+   遊戲層（貼底）
+===================== */
+:root {
+  --game-height: 45vh;   /* ⭐ 遊戲佔畫面高度 */
+  --base-width: 350px;   /* ⭐ 石台大小 */
+  --overlap: -35px;      /* ⭐ 塔與石台疊合 */
+}
+
+#game {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--game-height);
+  padding: 0 5vw 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  z-index: 2;
+}
+
+/* =====================
+   塔位（peg）
+===================== */
+.peg {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  outline: none;
+  user-select: none;
+}
+
+/* 石台 */
+.base {
+  width: var(--base-width);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* =====================
+   蛋（block）
+===================== */
+.block {
+  position: relative;
+  margin-bottom: var(--overlap);
+  pointer-events: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* 最上層可操作 */
+.block.active {
+  pointer-events: auto;
+  cursor: pointer;
+  animation: glow 1.3s infinite alternate;
+}
+
+/* 被選取 */
+.block.selected {
+  outline: 2px solid gold;
+  outline-offset: 4px;
+}
+
+/* 發光動畫 */
+@keyframes glow {
+  from { transform: translateY(0); box-shadow: 0 0 0 gold; }
+  to   { transform: translateY(-6px); box-shadow: 0 0 18px gold; }
+}
+
+/* =====================
+   訊息
+===================== */
+#message {
+  position: fixed;
+  top: 20%;                 /* ⭐ Y：在畫面上方（可調） */
+  left: 50%;                /* X：置中 */
+  transform: translateX(-50%);
+  z-index: 4;
+  color: rgb(255, 255, 255);
+  font-size: 2.2rem;
+  text-align: center;
+  pointer-events: none;
+}
+/* =====================
+   過關 Congrats Overlay
+===================== */
+#congrats {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: none;                 /* 預設不顯示 */
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+#congrats img {
+  max-width: 70%;
+  max-height: 70%;
+  animation: popIn 0.6s ease-out;
+}
+
+/* 彈出動畫 */
+@keyframes popIn {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
