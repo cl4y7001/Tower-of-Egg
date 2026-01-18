@@ -139,15 +139,23 @@ html, body {
    過關
 ===================== */
 #congrats {
-  position: absolute;
+  position: absolute;   /* ❗不要用 fixed */
   inset: 0;
-  background: rgba(0,0,0,.75);
+
   display: none;
   align-items: center;
   justify-content: center;
+
+  background: rgba(0,0,0,.75);
   z-index: 10;
 }
 
 #congrats img {
-  max-width: 70%;
+  width: auto;
+  height: auto;
+
+  max-width: 780px;   /* ✅ iPad 10.5 橫向安全寬 */
+  max-height: 520px;  /* ✅ iPad 10.5 橫向安全高 */
+
+  object-fit: contain;
 }
