@@ -13,7 +13,7 @@ const blocksData = [
 let selectedBlock = null;
 let stage = 1;
 
-/* 初始化：全部放左邊 */
+/* 初始化 */
 blocksData.forEach(data => {
   const img = document.createElement("img");
   img.src = data.src;
@@ -40,7 +40,7 @@ function selectBlock(block) {
   block.classList.add("selected");
 }
 
-/* 點塔位 */
+/* 點擊 peg */
 pegs.forEach((peg, idx) => {
   peg.addEventListener("click", () => moveToPeg(idx));
 });
@@ -66,7 +66,7 @@ function moveToPeg(idx) {
   checkGoal();
 }
 
-/* 更新最上層 */
+/* 更新可操作 */
 function updateActive() {
   document.querySelectorAll(".block").forEach(b => b.classList.remove("active"));
   pegs.forEach(peg => {
@@ -79,7 +79,7 @@ function clearSelection() {
   document.querySelectorAll(".block").forEach(b => b.classList.remove("selected"));
 }
 
-/* 任務判斷 */
+/* 任務 */
 function countBlocks(peg) {
   return peg.querySelectorAll(".block").length;
 }
@@ -88,14 +88,11 @@ function checkGoal() {
   if (stage === 1 && countBlocks(pegs[1]) === 4) {
     stage = 2;
     goalText.textContent = "目標二：將蛋塔移動到右邊";
-    message.textContent = "✨ 目標一：完成";
+    message.textContent = "✨ 目標一完成";
   }
 
   if (stage === 2 && countBlocks(pegs[2]) === 4) {
-    message.textContent = "塔心已開啟，守護者獻上前往光之城的通行證";
-
-    // 顯示過關圖片
-    const congrats = document.getElementById("congrats");
-    congrats.style.display = "flex";
+    message.textContent = "塔心已開啟，守護者獻上通行證";
+    document.getElementById("congrats").style.display = "flex";
   }
 }

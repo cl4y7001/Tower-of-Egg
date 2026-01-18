@@ -2,43 +2,54 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>蛋塔守護者</title>
+
+  <!-- 🔒 鎖 iPad 橫向 -->
+  <meta name="viewport"
+        content="width=1112,
+                 height=834,
+                 initial-scale=1.0,
+                 maximum-scale=1.0,
+                 user-scalable=no" />
+
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- 背景層（只顯示，不互動） -->
-  <div id="bg"></div>
+  <div id="stage">
 
-  <!-- HUD / 任務文字 -->
-  <div id="hud">
-    <h1>🥚 蛋塔守護者</h1>
-    <p id="goalText">目標一：將蛋塔移動到中間</p>
-    <p class="hint">先點選發光的蛋，再點擊目標石台</p>
+    <!-- 背景 -->
+    <div id="bg"></div>
+
+    <!-- HUD -->
+    <div id="hud">
+      <h1>🥚 蛋塔守護者</h1>
+      <p id="goalText">目標一：將蛋塔移動到中間</p>
+      <p class="hint">先點選發光的蛋，再點擊目標石台</p>
+    </div>
+
+    <!-- 遊戲區 -->
+    <div id="game">
+      <div class="peg">
+        <img class="base" src="assets/base.png" />
+      </div>
+      <div class="peg">
+        <img class="base" src="assets/base.png" />
+      </div>
+      <div class="peg">
+        <img class="base" src="assets/base.png" />
+      </div>
+    </div>
+
+    <div id="message"></div>
+
+    <!-- 過關 -->
+    <div id="congrats">
+      <img src="assets/congrats-image.png" />
+    </div>
+
   </div>
 
-  <!-- 遊戲層 -->
-  <div id="game">
-    <div class="peg" data-index="0">
-      <img class="base" src="assets/base.png" />
-    </div>
-
-    <div class="peg" data-index="1">
-      <img class="base" src="assets/base.png" />
-    </div>
-
-    <div class="peg" data-index="2">
-      <img class="base" src="assets/base.png" />
-    </div>
-  </div>
-
-  <div id="message"></div>
   <script src="game.js"></script>
-
-  <!-- 過關畫面 -->
-  <div id="congrats">
-    <img src="assets/congrats-image.png" alt="congratulations" />
-  </div>
 </body>
 </html>
