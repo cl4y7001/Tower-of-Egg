@@ -1,3 +1,24 @@
+/* =====================
+   🎵 音樂系統
+===================== */
+const bgm = new Audio("assets/bgm.mp3");
+bgm.loop = true;
+bgm.volume = 0.5;
+
+const winSound = new Audio("assets/win.mp3");
+winSound.volume = 0.8;
+
+let bgmStarted = false;
+
+/* 使用者首次互動後啟動 BGM */
+function startBGMOnce() {
+  if (bgmStarted) return;
+  bgmStarted = true;
+  bgm.play().catch(() => {});
+}
+
+
+
 const pegs = document.querySelectorAll(".peg");
 const goalText = document.getElementById("goalText");
 const message = document.getElementById("message");
@@ -24,6 +45,7 @@ blocksData.forEach(data => {
 
   img.addEventListener("click", e => {
     e.stopPropagation();
+    startBGMOnce();   // 🎵 啟動背景音樂（只會一次）
     if (!img.classList.contains("active")) return;
     selectBlock(img);
   });
@@ -93,6 +115,12 @@ function checkGoal() {
 
   if (stage === 2 && countBlocks(pegs[2]) === 4) {
     message.textContent = "塔心已開啟，守護者獻上通行證";
+    // 🎵 停止背景音樂
+    bgm.pause();
+    bgm.currentTime = 0;
+
+    // 🎵 播放破關音樂（一次）
+    winSound.play().catch(() => {});
     document.getElementById("congrats").style.display = "flex";
   }
 }
